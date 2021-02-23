@@ -1,10 +1,11 @@
 package org.example.arithmetic;
 
-public interface Arithmetic {
+import java.io.FileNotFoundException;
+
+public interface Arithmetic  {
 
 
-    public void action();
 
-
+    public void action(int o) throws FileNotFoundException;
 
 }
