@@ -1,28 +1,22 @@
 package org.example.arithmetic;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+
 
 public class ReadFilesArithmetic implements Arithmetic {
 
-    ArrayList arrayList = new ArrayList<>();
-    int summ = 0;
-
     @Override
-    public void action(int j) throws FileNotFoundException {
+    public void action(int j) throws IOException {
 
-        String numbers;
+        String numbe;
+        int summa = 0;
         BufferedReader bufferedReader = new BufferedReader(new FileReader("numbers.txt"));
 
-        String a = bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
-        String[] as = a.split(",");
-
-        for (String s : as) {
-            addFile(s);
+        while ((numbe = bufferedReader.readLine()) != null) {
+            int numbers = Integer.parseInt(numbe);
+            summa = summa + numbers;
         }
-
-
+        addFile(String.valueOf(summa));
     }
 
     public String addFile(String string) {
@@ -33,8 +27,4 @@ public class ReadFilesArithmetic implements Arithmetic {
         }
         return null;
     }
-
-
-
-
 }

@@ -8,6 +8,8 @@ public class MyRunnable implements Runnable {
 
     Arithmetic arithmetic;
     private int counts;
+    Object mono = new Object();
+
 
     public MyRunnable(Arithmetic arithmetic, int counts) {
         this.arithmetic = arithmetic;
@@ -16,8 +18,16 @@ public class MyRunnable implements Runnable {
 
     @SneakyThrows
     public void run() {
+
         for (int j = 0; j < counts; j++) {
-            arithmetic.action(j);
+
+            synchronized (Object.class) {
+
+            }
+
+
         }
+
+
     }
 }
