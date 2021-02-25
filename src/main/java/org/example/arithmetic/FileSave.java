@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class FileSave {
 
-    Object monitor = new Object();
+    Object monitor = new Object(); // монитор для синхронизации
 
 
     public void readFiles(String string) {
