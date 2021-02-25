@@ -3,13 +3,12 @@ package org.example.arithmetic;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ParserFilesArithmetic implements Arithmetic {
+public class ParserFilesArithmetic {
 
     ArrayList File = new ArrayList();
 
 
-    @Override
-    public void action(int j) throws IOException {
+    public void action() throws IOException {
 
         String telephone;
         BufferedReader bufferedReader = new BufferedReader(new FileReader("test.txt"));

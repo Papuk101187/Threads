@@ -3,9 +3,8 @@ package org.example.arithmetic;
 import java.io.*;
 
 
-public class ReadFilesArithmetic implements Arithmetic {
+public class ReadFilesArithmetic {
 
-    @Override
     public void action(int j) throws IOException {
 
         String numbe;

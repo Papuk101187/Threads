@@ -1,7 +1,6 @@
 package org.example;
-import org.example.arithmetic.FibonacciArithmetic;
-import org.example.arithmetic.ParserFilesArithmetic;
-import org.example.arithmetic.ReadFilesArithmetic;
+import lombok.SneakyThrows;
+import org.example.arithmetic.FileSave;
 import java.io.*;
 
 
@@ -9,22 +8,69 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
+        FileSave fileSave = new FileSave(); // для работы с файлами
 
-        MyRunnable myRunnable1 = new MyRunnable(new FibonacciArithmetic(), 16); // фибоначи
-        MyRunnable myRunnable2 = new MyRunnable(new ReadFilesArithmetic(), 1); // читаем файл с числами и суммируем
-        MyRunnable myRunnable3 = new MyRunnable(new ParserFilesArithmetic(), 1); // парсим файл
 
-        Thread thread1 = new Thread(myRunnable1);  // поток № 1
-        Thread thread2 = new Thread(myRunnable2); // поток № 2
-        Thread thread3 = new Thread(myRunnable3); // поток № 3
+        Thread thread1 = new Thread(new Runnable() {
+            int fibona;
 
-        thread1.start(); // запускаем поток № 1
-        thread2.start(); // запускаем поток № 2
-        thread3.start(); // запускаем поток № 3
+            @Override
+            public void run() {
 
-        thread1.join(); // запускаем поток № 1
-        thread2.join(); // запускаем поток № 2
-        thread3.join(); // запускаем поток № 3
+                for (int j = 0; j < 16; j++) {
+
+                    if (j == 15) {
+                        fibona = fibonacci(j);
+                        System.out.println("На " + j + " число фибоначи = " + fibona);
+                    }
+                }
+                fileSave.readFiles(String.valueOf(fibona));
+            }
+
+            private int fibonacci(int number) {
+                if (number == 0) return 0;
+                if (number == 1) return 1;
+                return fibonacci(number - 2) + fibonacci(number - 1);
+            }
+        });
+
+
+        Thread thread2 = new Thread(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                String numbe;
+                int summa = 0;
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("numbers.txt"));
+                while ((numbe = bufferedReader.readLine()) != null) {
+                    int numbers = Integer.parseInt(numbe);
+                    summa = summa + numbers;
+                }
+                fileSave.readFiles(String.valueOf(summa));
+            }
+        });
+
+        Thread thread3 = new Thread(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                String phone;
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("test.txt"));
+                while ((phone = bufferedReader.readLine()) != null) {
+                    fileSave.readFiles(phone);
+                }
+            }
+        });
+
+
+        thread1.start();
+        thread2.start();
+        thread3.start();
+
+        thread1.join();
+        thread2.join();
+        thread3.join();
+
 
 
     }

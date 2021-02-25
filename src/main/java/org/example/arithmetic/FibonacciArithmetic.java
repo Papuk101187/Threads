@@ -1,8 +1,8 @@
 package org.example.arithmetic;
 
 
-public class FibonacciArithmetic implements Arithmetic {
-    int fibona = 0;
+public class FibonacciArithmetic {
+    int fibona = 16;
 
     private int fibonacci(int number) {
         if (number == 0) return 0;
@@ -10,13 +10,13 @@ public class FibonacciArithmetic implements Arithmetic {
         return fibonacci(number - 2) + fibonacci(number - 1);
     }
 
+    public void action() {
+        for(int j=0;j<15;j++) {
 
-
-    @Override
-    public void action(int number) {
-        if (number == 15) {
-            fibona = fibonacci(number);
-            System.out.println("На " +number + " число фибоначи = " + fibona);
+            if (j == 15) {
+                fibona = fibonacci(j);
+                System.out.println("На " + j + " число фибоначи = " + fibona);
+            }
         }
 
     }
